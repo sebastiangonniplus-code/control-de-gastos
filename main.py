@@ -1,8 +1,18 @@
 from fastapi import FastAPI, HTTPException
 from services.expense_manager import ManagerExpenses
 from models.expense import MovimientosFinancierosDeEntrada, DevolucionAlUsuario
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # O el origen específico de tu front
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 manager = ManagerExpenses()
-app= FastAPI()
 manager = ManagerExpenses()
 
 @app.post("/expenses", response_model=DevolucionAlUsuario)
