@@ -51,3 +51,14 @@ class ManagerExpenses:
     def obtener_datos(self):
         #Retorna todos los gastos almacenados.
         return self.cargar_datos()
+
+
+    def obtener_gastos_por_id(self, gasto_id):
+        #Obtiene cada gasto por su correspondiente id.
+        datos = self.cargar_datos()
+
+        for datitos in datos:
+                if datitos['id'] == gasto_id:
+                    return datitos
+                
+        return  None            

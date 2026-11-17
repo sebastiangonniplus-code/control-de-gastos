@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from services.expense_manager import ManagerExpenses
 from models.expense import MovimientosFinancierosDeEntrada, DevolucionAlUsuario
 app= FastAPI()
@@ -15,3 +15,14 @@ def crear_gasto(gasto: MovimientosFinancierosDeEntrada):
 @app.get("/expenses", response_model=list[DevolucionAlUsuario])
 def listar_gastos():
      return manager.cargar_datos()
+
+
+@app.get("/expenses/{gasto_id}")
+def obtener_id(gasto_id: int):
+
+     id_obtenido = manager.obtener_gastos_por_id(gasto_id)
+
+     if id_obtenido == None:
+          raise HTTPException(status_code=404, detail="...")
+
+     return id_obtenido
