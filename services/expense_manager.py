@@ -35,14 +35,19 @@ class ManagerExpenses:
     def agregar_gasto(self,nuevo_gasto):
         #Agrega un gasto al json
         
-        datos_actuales = self.cargar_datos()
-        if len(datos_actuales) == 0:
+       datos_actuales = self.cargar_datos()
+       if len(datos_actuales) == 0:
             ultimo_id = 1
-        else:
+       else:
             ultimo_id = datos_actuales[-1]['id'] + 1
 
-        gasto_dict= dict(nuevo_gasto)
-        gasto_dict['id']= ultimo_id
-        datos_actuales.append(gasto_dict)
-        self.guardar_Datos(datos_actuales)
-        return gasto_dict
+       gasto_dict = nuevo_gasto.model_dump(mode='json') 
+       gasto_dict['id'] = ultimo_id
+       datos_actuales.append(gasto_dict)
+       self.guardar_Datos(datos_actuales)
+   
+       return gasto_dict
+
+    def obtener_datos(self):
+        #Retorna todos los gastos almacenados.
+        return self.cargar_datos()
