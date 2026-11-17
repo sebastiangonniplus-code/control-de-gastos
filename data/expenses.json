@@ -5,5 +5,12 @@
         "categoria": "string",
         "fecha": "2026-11-17",
         "id": 2
+    },
+    {
+        "titulo": "string",
+        "cantidad": 1.0,
+        "categoria": "string",
+        "fecha": "2026-11-17",
+        "id": 3
     }
 ]

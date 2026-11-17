@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from services.expense_manager import ManagerExpenses
 from models.expense import MovimientosFinancierosDeEntrada, DevolucionAlUsuario
+manager = ManagerExpenses()
 app= FastAPI()
 manager = ManagerExpenses()
 
@@ -39,3 +40,17 @@ def eliminar_id(gasto_id: int):
 
     # Retornamos un diccionario JSON de éxito para el cliente
     return {"mensaje": "Gasto eliminado con éxito"}
+
+
+
+@app.put("/expenses/{gasto_id}")
+def actualizar_Dato(gasto_id: int, gasto_actualizado: MovimientosFinancierosDeEntrada):
+    print("DATOS QUE LLEGAN AL PUT:", gasto_actualizado)
+    
+    resultado = manager.actualizar_gasto(gasto_id, gasto_actualizado)
+
+    if resultado is None:
+        raise HTTPException(status_code=404, detail="Gasto no encontrado")
+
+    return resultado
+         
