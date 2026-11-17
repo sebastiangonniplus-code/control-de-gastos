@@ -36,10 +36,13 @@ class ManagerExpenses:
         #Agrega un gasto al json
         
         datos_actuales = self.cargar_datos()
-
         if len(datos_actuales) == 0:
-            datos_actuales.append(1)
-
+            ultimo_id = 1
         else:
-            ultimo_id = datos_actuales[-1]['id']
-            datos_actuales.append['id'][ultimo_id + 1]  
+            ultimo_id = datos_actuales[-1]['id'] + 1
+
+        gasto_dict= dict(nuevo_gasto)
+        gasto_dict['id']= ultimo_id
+        datos_actuales.append(gasto_dict)
+        self.guardar_Datos(datos_actuales)
+        return gasto_dict
