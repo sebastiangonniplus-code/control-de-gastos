@@ -61,4 +61,17 @@ class ManagerExpenses:
                 if datitos['id'] == gasto_id:
                     return datitos
                 
-        return  None            
+        return  None
+
+
+    def eliminar_gasto(self, gasto_id):
+        #ELimina un gasto por su id.
+        datos = self.cargar_datos()
+
+        for datitos in datos:
+            if datitos['id']   == gasto_id:
+                datos.remove(datitos)
+                self.guardar_Datos(datos)
+                return True
+
+        return None    

@@ -26,3 +26,16 @@ def obtener_id(gasto_id: int):
           raise HTTPException(status_code=404, detail="...")
 
      return id_obtenido
+
+
+@app.delete("/expenses/{gasto_id}")
+def eliminar_id(gasto_id: int):
+    # Llamamos al método de tu manager
+    resultado = manager.eliminar_gasto(gasto_id)
+
+    # Si retorna None, el ID no existía
+    if resultado is None:
+        raise HTTPException(status_code=404, detail="Gasto no encontrado")
+
+    # Retornamos un diccionario JSON de éxito para el cliente
+    return {"mensaje": "Gasto eliminado con éxito"}
